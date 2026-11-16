@@ -18,7 +18,7 @@ A prototype tool for better coach–player communication in baseball. Players fi
 - **Next.js 15** (App Router, Server Components, Server Actions) and **React 19**
 - **Tailwind CSS** with **shadcn/ui** (Radix primitives)
 - **Cloud Firestore** for the shared roster
-- **Genkit** with the Google AI plugin (`gemini-flash-latest`)
+- **Genkit** with the Google AI plugin (`gemini-flash-lite-latest` by default)
 - Deployed on **Vercel**
 
 ## How the public demo works
@@ -60,6 +60,7 @@ Import the repository into Vercel (framework preset: Next.js) and set one enviro
 | Variable         | Purpose                                                                     |
 | ---------------- | --------------------------------------------------------------------------- |
 | `GEMINI_API_KEY` | Google AI Studio key used by the AI summary. Server-side only.              |
+| `GEMINI_MODEL`   | Optional. Gemini model id; defaults to `gemini-flash-lite-latest`.          |
 
 ## Project structure
 
