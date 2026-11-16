@@ -2,7 +2,7 @@
 
 A prototype tool for better coach–player communication in baseball. Players fill out a short survey about how they learn, how they like feedback, and what motivates them. Coaches get a profile that combines those preferences with performance stats and their own notes, plus an AI-generated summary of how to coach that player.
 
-**Live demo:** _coming soon_
+**Live demo:** https://coaching-compass-taupe.vercel.app
 
 > All players, survey responses and statistics in the demo are fictional and for illustration only.
 
