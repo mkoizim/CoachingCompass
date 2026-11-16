@@ -1,0 +1,41 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js build output
+/.next/
+/out/
+
+# Production
+/build
+
+# d.ts files
+# Ignoring these files is a good practice for most Next.js projects.
+# They are generated on demand and shouldn't be committed to version control.
+# See: https://nextjs.org/docs/app/building-your-application/configuring/typescript#staged-typescript-files
+#
+# If you need to customize d.ts files, you can remove the following line.
+**/*.d.ts
+
+
+# ESLint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Turbopack
+.turbo
+
+# TypeScript incremental build info
+*.tsbuildinfo
