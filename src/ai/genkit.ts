@@ -1,5 +1,5 @@
-import {genkit} from 'genkit';
-import {googleAI} from '@genkit-ai/googleai';
+import { genkit } from 'genkit';
+import { googleAI } from '@genkit-ai/googleai';
 
 // A "-latest" alias keeps the app working as Google retires specific model versions.
 // Flash-Lite is used for latency: the full Flash model's default reasoning made

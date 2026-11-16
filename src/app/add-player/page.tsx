@@ -1,5 +1,5 @@
-import { Header } from "@/components/Header";
-import { AddPlayerClient } from "./AddPlayerClient";
+import { Header } from '@/components/Header';
+import { AddPlayerClient } from './AddPlayerClient';
 
 export const metadata = {
   title: 'Add New Player | CoachingCompass',

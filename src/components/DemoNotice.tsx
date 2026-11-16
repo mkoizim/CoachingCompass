@@ -23,7 +23,8 @@ export function DemoNotice() {
         <p className="flex items-center gap-2 text-foreground">
           <FlaskConical className="h-4 w-4 shrink-0 text-primary" />
           <span>
-            <strong>Live demo.</strong> Add players, take the survey, and leave notes freely. Your changes are saved only in this browser.
+            <strong>Live demo.</strong> Add players, take the survey, and leave notes freely. Your
+            changes are saved only in this browser.
           </span>
         </p>
         {hasChanges && (

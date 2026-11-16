@@ -22,7 +22,7 @@ export function AddPlayerClient() {
     // accessed in the browser.
     setSurveyUrl(window.location.origin + '/survey');
   }, []);
-  
+
   const copyToClipboard = () => {
     if (!surveyUrl) return;
     navigator.clipboard.writeText(surveyUrl);
@@ -38,7 +38,7 @@ export function AddPlayerClient() {
     const body = `Please complete your player survey by visiting this link: ${surveyUrl}`;
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
-  
+
   const proceedToSurvey = () => {
     router.push('/survey');
   };
@@ -51,15 +51,20 @@ export function AddPlayerClient() {
           Choose one of the options below to get the survey to your new player.
         </p>
         <p className="text-sm text-muted-foreground mt-2">
-          In this demo, a submitted survey is saved in the browser it was completed in. Use &ldquo;Proceed to Survey&rdquo; below to see it on your roster.
+          In this demo, a submitted survey is saved in the browser it was completed in. Use
+          &ldquo;Proceed to Survey&rdquo; below to see it on your roster.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="font-headline flex items-center gap-2"><Copy /> Shareable Link</CardTitle>
-              <CardDescription>Copy the link and send it to the player via text or another messaging app.</CardDescription>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Copy /> Shareable Link
+              </CardTitle>
+              <CardDescription>
+                Copy the link and send it to the player via text or another messaging app.
+              </CardDescription>
             </CardHeader>
             <CardContent className="flex items-center gap-2">
               <Input value={surveyUrl} readOnly className="bg-muted" />
@@ -70,46 +75,54 @@ export function AddPlayerClient() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="font-headline flex items-center gap-2"><Mail /> Email Link</CardTitle>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Mail /> Email Link
+              </CardTitle>
               <CardDescription>Compose a new email containing the survey link.</CardDescription>
             </CardHeader>
             <CardContent>
-                <Button className="w-full" onClick={handleEmail} disabled={!surveyUrl}>
-                    <Mail /> Compose Email
-                </Button>
+              <Button className="w-full" onClick={handleEmail} disabled={!surveyUrl}>
+                <Mail /> Compose Email
+              </Button>
             </CardContent>
           </Card>
         </div>
         <div className="space-y-8">
-            <Card className="text-center">
-                <CardHeader>
-                    <CardTitle className="font-headline flex items-center justify-center gap-2"><QrCode /> Scan QR Code</CardTitle>
-                    <CardDescription>The player can scan this code with their mobile device to open the survey directly.</CardDescription>
-                </CardHeader>
-                <CardContent className="flex justify-center p-6 min-h-[252px] items-center">
-                    {surveyUrl ? (
-                      <div className="p-4 bg-white rounded-lg">
-                        <QRCode value={surveyUrl} size={200} fgColor="#000000" bgColor="#FFFFFF" />
-                      </div>
-                    ) : (
-                      <div className="text-muted-foreground">Generating QR Code...</div>
-                    )}
-                </CardContent>
-            </Card>
+          <Card className="text-center">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center justify-center gap-2">
+                <QrCode /> Scan QR Code
+              </CardTitle>
+              <CardDescription>
+                The player can scan this code with their mobile device to open the survey directly.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex justify-center p-6 min-h-[252px] items-center">
+              {surveyUrl ? (
+                <div className="p-4 bg-white rounded-lg">
+                  <QRCode value={surveyUrl} size={200} fgColor="#000000" bgColor="#FFFFFF" />
+                </div>
+              ) : (
+                <div className="text-muted-foreground">Generating QR Code...</div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </div>
       <div className="mt-12 pt-8 border-t">
-          <Card className="bg-card/50">
-              <CardHeader className="text-center">
-                  <CardTitle className="font-headline">Ready to Fill It Out Now?</CardTitle>
-                  <CardDescription>If you are with the player, you can proceed directly to the survey.</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                  <Button size="lg" onClick={proceedToSurvey}>
-                      Proceed to Survey <ArrowRight />
-                  </Button>
-              </CardContent>
-          </Card>
+        <Card className="bg-card/50">
+          <CardHeader className="text-center">
+            <CardTitle className="font-headline">Ready to Fill It Out Now?</CardTitle>
+            <CardDescription>
+              If you are with the player, you can proceed directly to the survey.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="text-center">
+            <Button size="lg" onClick={proceedToSurvey}>
+              Proceed to Survey <ArrowRight />
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

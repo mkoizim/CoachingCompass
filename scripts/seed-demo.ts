@@ -55,7 +55,7 @@ async function summarize(player: Omit<Player, 'profileSummary'>): Promise<Profil
   const result = await summarizePlayerProfile({
     position: player.position,
     ...player.survey,
-    coachingNotes: player.feedback.map(f => f.text),
+    coachingNotes: player.feedback.map((f) => f.text),
     stats: player.stats,
   });
   return { ...result, generatedDate: new Date().toISOString() };
@@ -83,7 +83,7 @@ async function main() {
   await terminate(db);
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });

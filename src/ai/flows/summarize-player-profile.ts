@@ -9,8 +9,8 @@
  * - SummarizePlayerProfileOutput - The return type for the summarizePlayerProfile function.
  */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { ai } from '@/ai/genkit';
+import { z } from 'genkit';
 
 const StatSchema = z.object({
   value: z.number(),
@@ -18,95 +18,177 @@ const StatSchema = z.object({
 });
 
 const BattingStatsSchema = z.object({
-    xwoba: StatSchema,
-    xba: StatSchema,
-    xslg: StatSchema,
-    avgExitVelo: StatSchema,
-    barrelRate: StatSchema,
-    hardHitRate: StatSchema,
-    sweetSpotRate: StatSchema,
-    batSpeed: StatSchema,
-    squaredUpRate: StatSchema,
-    chaseRate: StatSchema,
-    whiffRate: StatSchema,
-    kRate: StatSchema,
-    bbRate: StatSchema,
+  xwoba: StatSchema,
+  xba: StatSchema,
+  xslg: StatSchema,
+  avgExitVelo: StatSchema,
+  barrelRate: StatSchema,
+  hardHitRate: StatSchema,
+  sweetSpotRate: StatSchema,
+  batSpeed: StatSchema,
+  squaredUpRate: StatSchema,
+  chaseRate: StatSchema,
+  whiffRate: StatSchema,
+  kRate: StatSchema,
+  bbRate: StatSchema,
 });
 
 const BaseRunningStatsSchema = z.object({
-    sprintSpeed: StatSchema,
+  sprintSpeed: StatSchema,
 });
 
 const HitterStatsSchema = BattingStatsSchema.merge(BaseRunningStatsSchema).extend({
-    range: StatSchema,
-    armValue: StatSchema,
-    armStrength: StatSchema,
+  range: StatSchema,
+  armValue: StatSchema,
+  armStrength: StatSchema,
 });
 
 const CatcherStatsSchema = BattingStatsSchema.merge(BaseRunningStatsSchema).extend({
-    armStrength: StatSchema,
-    blocksAboveAverage: StatSchema,
-    csAboveAverage: StatSchema,
-    framingRuns: StatSchema,
+  armStrength: StatSchema,
+  blocksAboveAverage: StatSchema,
+  csAboveAverage: StatSchema,
+  framingRuns: StatSchema,
 });
 
 const PitcherStatsSchema = z.object({
-    pitchingRunValue: StatSchema,
-    fastballRunValue: StatSchema,
-    breakingRunValue: StatSchema,
-    offspeedRunValue: StatSchema,
-    xera: StatSchema,
-    xba: StatSchema,
-    fastballVelo: StatSchema,
-    avgExitVelo: StatSchema,
-    chaseRate: StatSchema,
-    whiffRate: StatSchema,
-    kRate: StatSchema,
-    bbRate: StatSchema,
-    barrelRate: StatSchema,
-    hardHitRate: StatSchema,
-    gbRate: StatSchema,
-    extension: StatSchema,
+  pitchingRunValue: StatSchema,
+  fastballRunValue: StatSchema,
+  breakingRunValue: StatSchema,
+  offspeedRunValue: StatSchema,
+  xera: StatSchema,
+  xba: StatSchema,
+  fastballVelo: StatSchema,
+  avgExitVelo: StatSchema,
+  chaseRate: StatSchema,
+  whiffRate: StatSchema,
+  kRate: StatSchema,
+  bbRate: StatSchema,
+  barrelRate: StatSchema,
+  hardHitRate: StatSchema,
+  gbRate: StatSchema,
+  extension: StatSchema,
 });
 
 const PlayerStatsSchema = z.union([HitterStatsSchema, CatcherStatsSchema, PitcherStatsSchema]);
 
 export const SummarizePlayerProfileInputSchema = z.object({
   position: z.string().max(200).optional().default('').describe("The player's primary position."),
-  learningStyleRanking: z.array(z.string().max(200)).max(10).optional().default([]).describe("The player's ranked preferences for learning new physical skills."),
-  performanceAnalysisPreference: z.string().max(200).optional().default('').describe("How the player prefers to analyze their performance (e.g., data, feel, or a mix)."),
-  coachExplanationPreference: z.string().max(200).optional().default('').describe("The player's preference for how a coach explains concepts."),
-  learningSettingRanking: z.array(z.string().max(200)).max(10).optional().default([]).describe("The player's ranked preferences for learning settings."),
-  coachingTimingRanking: z.array(z.string().max(200)).max(10).optional().default([]).describe("The player's ranked preferences for when they receive coaching."),
-  progressImportance: z.string().max(200).optional().default('').describe("How important it is for the player to see progress."),
-  feedbackStyle: z.string().max(200).optional().default('').describe("The style of feedback that is most effective for the player."),
-  motivationRanking: z.array(z.string().max(200)).max(10).optional().default([]).describe("The player's ranked career motivations."),
-  remoteCoachingOpenness: z.string().max(200).optional().default('').describe("The player's openness to remote coaching methods."),
-  bestCoachDescription: z.string().max(1500).optional().default('').describe("The player's description of the best coach they've had."),
-  improvementGoals: z.string().max(1500).optional().default('').describe("What the player wants to work on to improve."),
-  hobbies: z.string().max(1500).optional().default('').describe("What the player enjoys doing outside of baseball."),
-  coachingNotes: z.array(z.string().max(2000)).max(20).optional().default([]).describe("A list of notes from coaches about their interactions with the player."),
+  learningStyleRanking: z
+    .array(z.string().max(200))
+    .max(10)
+    .optional()
+    .default([])
+    .describe("The player's ranked preferences for learning new physical skills."),
+  performanceAnalysisPreference: z
+    .string()
+    .max(200)
+    .optional()
+    .default('')
+    .describe('How the player prefers to analyze their performance (e.g., data, feel, or a mix).'),
+  coachExplanationPreference: z
+    .string()
+    .max(200)
+    .optional()
+    .default('')
+    .describe("The player's preference for how a coach explains concepts."),
+  learningSettingRanking: z
+    .array(z.string().max(200))
+    .max(10)
+    .optional()
+    .default([])
+    .describe("The player's ranked preferences for learning settings."),
+  coachingTimingRanking: z
+    .array(z.string().max(200))
+    .max(10)
+    .optional()
+    .default([])
+    .describe("The player's ranked preferences for when they receive coaching."),
+  progressImportance: z
+    .string()
+    .max(200)
+    .optional()
+    .default('')
+    .describe('How important it is for the player to see progress.'),
+  feedbackStyle: z
+    .string()
+    .max(200)
+    .optional()
+    .default('')
+    .describe('The style of feedback that is most effective for the player.'),
+  motivationRanking: z
+    .array(z.string().max(200))
+    .max(10)
+    .optional()
+    .default([])
+    .describe("The player's ranked career motivations."),
+  remoteCoachingOpenness: z
+    .string()
+    .max(200)
+    .optional()
+    .default('')
+    .describe("The player's openness to remote coaching methods."),
+  bestCoachDescription: z
+    .string()
+    .max(1500)
+    .optional()
+    .default('')
+    .describe("The player's description of the best coach they've had."),
+  improvementGoals: z
+    .string()
+    .max(1500)
+    .optional()
+    .default('')
+    .describe('What the player wants to work on to improve.'),
+  hobbies: z
+    .string()
+    .max(1500)
+    .optional()
+    .default('')
+    .describe('What the player enjoys doing outside of baseball.'),
+  coachingNotes: z
+    .array(z.string().max(2000))
+    .max(20)
+    .optional()
+    .default([])
+    .describe('A list of notes from coaches about their interactions with the player.'),
   stats: PlayerStatsSchema.optional().describe("The player's key performance statistics."),
 });
 export type SummarizePlayerProfileInput = z.infer<typeof SummarizePlayerProfileInputSchema>;
 
 const SummarizePlayerProfileOutputSchema = z.object({
-  intro: z.string().describe("A brief paragraph (2-3 sentences) summarizing the player's key characteristics, including their primary motivation, learning style, and how they analyze their performance."),
-  dos: z.array(z.string()).describe('A list of specific, scannable "Dos" for coaching this player based on their preferences for feedback, communication, and coaching timing.'),
-  donts: z.array(z.string()).describe('A list of specific, scannable "Don\'ts" for coaching this player based on their preferences for feedback, communication, and coaching timing. Avoid confusing phrasing like double negatives (e.g., "Don\'t avoid talking about..."). Be direct.'),
-  focusAreas: z.array(z.string()).describe("A bulleted list of 3-5 brief, non-prescriptive concepts or skills for a coach to focus on with the player. Base this list on a synthesis of the player's stated goals, recent coaching notes, and their weakest statistical areas. For each item, cite the reason in parentheses, e.g., 'Swing Decision-Making (player's stated goal)' or 'Pitch Recognition (chase % is 22.4%)'."),
+  intro: z
+    .string()
+    .describe(
+      "A brief paragraph (2-3 sentences) summarizing the player's key characteristics, including their primary motivation, learning style, and how they analyze their performance.",
+    ),
+  dos: z
+    .array(z.string())
+    .describe(
+      'A list of specific, scannable "Dos" for coaching this player based on their preferences for feedback, communication, and coaching timing.',
+    ),
+  donts: z
+    .array(z.string())
+    .describe(
+      'A list of specific, scannable "Don\'ts" for coaching this player based on their preferences for feedback, communication, and coaching timing. Avoid confusing phrasing like double negatives (e.g., "Don\'t avoid talking about..."). Be direct.',
+    ),
+  focusAreas: z
+    .array(z.string())
+    .describe(
+      "A bulleted list of 3-5 brief, non-prescriptive concepts or skills for a coach to focus on with the player. Base this list on a synthesis of the player's stated goals, recent coaching notes, and their weakest statistical areas. For each item, cite the reason in parentheses, e.g., 'Swing Decision-Making (player's stated goal)' or 'Pitch Recognition (chase % is 22.4%)'.",
+    ),
 });
 export type SummarizePlayerProfileOutput = z.infer<typeof SummarizePlayerProfileOutputSchema>;
 
-
-export async function summarizePlayerProfile(input: SummarizePlayerProfileInput): Promise<SummarizePlayerProfileOutput> {
+export async function summarizePlayerProfile(
+  input: SummarizePlayerProfileInput,
+): Promise<SummarizePlayerProfileOutput> {
   return summarizePlayerProfileFlow(input);
 }
 
 const prompt = ai.definePrompt({
   name: 'summarizePlayerProfilePrompt',
-  input: {schema: SummarizePlayerProfileInputSchema},
-  output: {schema: SummarizePlayerProfileOutputSchema},
+  input: { schema: SummarizePlayerProfileInputSchema },
+  output: { schema: SummarizePlayerProfileOutputSchema },
   prompt: `You are an expert baseball coach and player development analyst. Your task is to synthesize a player's survey responses, coaching notes, and key stats into a concise, actionable coaching summary. This summary should highlight the player's learning style, motivations, and communication preferences so a coach can quickly understand the best way to work with them.
 
   **Player Position:** {{{position}}}
@@ -175,9 +257,8 @@ const summarizePlayerProfileFlow = ai.defineFlow(
     inputSchema: SummarizePlayerProfileInputSchema,
     outputSchema: SummarizePlayerProfileOutputSchema,
   },
-  async input => {
-    const {output} = await prompt(input);
+  async (input) => {
+    const { output } = await prompt(input);
     return output!;
-  }
+  },
 );
-

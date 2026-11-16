@@ -31,50 +31,12 @@ The demo is open to anyone, with no login, so it is sandboxed:
 
 ## Running locally
 
-Requires Node.js 20+.
+Requires Node.js 20+ and a [Gemini API key](https://aistudio.google.com/apikey).
 
 ```bash
 npm install
-cp .env.example .env   # then add your Gemini API key
+cp .env.example .env   # add your GEMINI_API_KEY
 npm run dev
-```
-
-The app reads the roster from the Firebase project configured in [`src/lib/firebase.ts`](src/lib/firebase.ts). To point it at your own project, replace that config and deploy the rules:
-
-```bash
-npx firebase-tools deploy --only firestore:rules --project <your-project-id>
-```
-
-### Seeding the sample roster
-
-[`scripts/seed-demo.ts`](scripts/seed-demo.ts) writes the sample players, with stats, notes and AI summaries, to `demoPlayers`. The committed rules block all writes, so temporarily allow writes to that collection, run the script, then redeploy `firestore.rules`:
-
-```bash
-GEMINI_API_KEY=... npm run seed:demo           # or: npm run seed:demo -- --no-ai
-```
-
-## Deploying
-
-Import the repository into Vercel (framework preset: Next.js) and set one environment variable:
-
-| Variable         | Purpose                                                                     |
-| ---------------- | --------------------------------------------------------------------------- |
-| `GEMINI_API_KEY` | Google AI Studio key used by the AI summary. Server-side only.              |
-| `GEMINI_MODEL`   | Optional. Gemini model id; defaults to `gemini-flash-lite-latest`.          |
-
-## Project structure
-
-```
-src/
-  app/                 routes: roster, survey, player profile, edit survey
-  app/actions/         server actions exposed to the browser
-  ai/                  Genkit setup and the profile summary flow
-  components/          app components (+ shadcn/ui in components/ui)
-  lib/                 types, stats generation, demo sandbox store, sample data
-  services/            read-only Firestore access
-scripts/seed-demo.ts   seeds the shared sample roster
-firestore.rules        Firestore Security Rules
-docs/blueprint.md      the original product brief
 ```
 
 ## Background

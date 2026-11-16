@@ -1,5 +1,3 @@
-
-
 export interface Player {
   id: string;
   name: string;
@@ -22,65 +20,63 @@ export interface ProfileSummary {
 }
 
 export interface Stat {
-    value: number;
-    percentile: number;
+  value: number;
+  percentile: number;
 }
 
 export interface BattingStats {
-    xwoba: Stat;
-    xba: Stat;
-    xslg: Stat;
-    avgExitVelo: Stat;
-    barrelRate: Stat;
-    hardHitRate: Stat;
-    sweetSpotRate: Stat;
-    batSpeed: Stat;
-    squaredUpRate: Stat;
-    chaseRate: Stat;
-    whiffRate: Stat;
-    kRate: Stat;
-    bbRate: Stat;
+  xwoba: Stat;
+  xba: Stat;
+  xslg: Stat;
+  avgExitVelo: Stat;
+  barrelRate: Stat;
+  hardHitRate: Stat;
+  sweetSpotRate: Stat;
+  batSpeed: Stat;
+  squaredUpRate: Stat;
+  chaseRate: Stat;
+  whiffRate: Stat;
+  kRate: Stat;
+  bbRate: Stat;
 }
 
 export interface BaseRunningStats {
-    sprintSpeed: Stat;
+  sprintSpeed: Stat;
 }
 
 export interface HitterStats extends BattingStats, BaseRunningStats {
-    // Fielding
-    range: Stat;
-    armValue: Stat;
-    armStrength: Stat;
+  // Fielding
+  range: Stat;
+  armValue: Stat;
+  armStrength: Stat;
 }
 
 export interface CatcherStats extends BattingStats, BaseRunningStats {
-    // Fielding
-    armStrength: Stat;
-    blocksAboveAverage: Stat;
-    csAboveAverage: Stat;
-    framingRuns: Stat;
+  // Fielding
+  armStrength: Stat;
+  blocksAboveAverage: Stat;
+  csAboveAverage: Stat;
+  framingRuns: Stat;
 }
-
 
 export interface PitcherStats {
-    pitchingRunValue: Stat;
-    fastballRunValue: Stat;
-    breakingRunValue: Stat;
-    offspeedRunValue: Stat;
-    xera: Stat;
-    xba: Stat;
-    fastballVelo: Stat;
-    avgExitVelo: Stat;
-    chaseRate: Stat;
-    whiffRate: Stat;
-    kRate: Stat;
-    bbRate: Stat;
-    barrelRate: Stat;
-    hardHitRate: Stat;
-    gbRate: Stat;
-    extension: Stat;
+  pitchingRunValue: Stat;
+  fastballRunValue: Stat;
+  breakingRunValue: Stat;
+  offspeedRunValue: Stat;
+  xera: Stat;
+  xba: Stat;
+  fastballVelo: Stat;
+  avgExitVelo: Stat;
+  chaseRate: Stat;
+  whiffRate: Stat;
+  kRate: Stat;
+  bbRate: Stat;
+  barrelRate: Stat;
+  hardHitRate: Stat;
+  gbRate: Stat;
+  extension: Stat;
 }
-
 
 export interface PlayerSurvey {
   learningStyleRanking: string[];

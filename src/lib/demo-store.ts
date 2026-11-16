@@ -38,9 +38,10 @@ function readOverlay(): Overlay {
   cachedRaw = raw;
   try {
     const parsed = raw ? JSON.parse(raw) : null;
-    cachedOverlay = parsed && typeof parsed === 'object'
-      ? { upserts: parsed.upserts ?? {}, deleted: parsed.deleted ?? [] }
-      : EMPTY;
+    cachedOverlay =
+      parsed && typeof parsed === 'object'
+        ? { upserts: parsed.upserts ?? {}, deleted: parsed.deleted ?? [] }
+        : EMPTY;
   } catch {
     cachedOverlay = EMPTY;
   }
@@ -86,7 +87,7 @@ export function savePlayer(player: Player) {
   const current = readOverlay();
   writeOverlay({
     upserts: { ...current.upserts, [player.id]: player },
-    deleted: current.deleted.filter(id => id !== player.id),
+    deleted: current.deleted.filter((id) => id !== player.id),
   });
 }
 
@@ -109,9 +110,10 @@ export function resetDemo() {
 }
 
 export function newLocalPlayerId() {
-  const random = typeof crypto !== 'undefined' && 'randomUUID' in crypto
-    ? crypto.randomUUID()
-    : Math.random().toString(36).slice(2);
+  const random =
+    typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID()
+      : Math.random().toString(36).slice(2);
   return `local-${random}`;
 }
 
@@ -120,11 +122,13 @@ export function useRoster(seedPlayers: Player[]): Player[] {
   const overlay = useOverlay();
   return useMemo(() => {
     const deleted = new Set(overlay.deleted);
-    const seedIds = new Set(seedPlayers.map(p => p.id));
+    const seedIds = new Set(seedPlayers.map((p) => p.id));
     const merged = seedPlayers
-      .filter(p => !deleted.has(p.id))
-      .map(p => overlay.upserts[p.id] ?? p);
-    const localOnly = Object.values(overlay.upserts).filter(p => !seedIds.has(p.id) && !deleted.has(p.id));
+      .filter((p) => !deleted.has(p.id))
+      .map((p) => overlay.upserts[p.id] ?? p);
+    const localOnly = Object.values(overlay.upserts).filter(
+      (p) => !seedIds.has(p.id) && !deleted.has(p.id),
+    );
     return [...merged, ...localOnly];
   }, [seedPlayers, overlay]);
 }

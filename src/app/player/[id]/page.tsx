@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { Header } from "@/components/Header";
-import { getDemoPlayer } from "@/services/player-service";
-import { PlayerProfileView } from "./PlayerProfileView";
+import type { Metadata } from 'next';
+import { Header } from '@/components/Header';
+import { getDemoPlayer } from '@/services/player-service';
+import { PlayerProfileView } from './PlayerProfileView';
 
 export const dynamic = 'force-dynamic';
 
