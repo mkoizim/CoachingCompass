@@ -1,6 +1,6 @@
 # CoachingCompass
 
-A prototype tool for better coach–player communication in baseball. Players fill out a short survey about how they learn, how they like feedback, and what motivates them. Coaches get a profile that combines those preferences with performance stats and their own notes, plus an AI-generated summary of how to coach that player.
+A prototype tool for more effective coach–player communication in baseball. Players fill out a short survey about how they learn, how they like feedback, and what motivates them. Coaches get a profile that combines those preferences with performance stats and their own notes, plus an AI-generated summary with non-binding tips on how to coach that player.
 
 **Live demo:** https://coaching-compass-taupe.vercel.app
 
@@ -8,7 +8,7 @@ A prototype tool for better coach–player communication in baseball. Players fi
 
 ## Features
 
-- **Player survey**: ranked and multiple-choice questions on learning style, feedback style, coaching timing and motivation, plus open-ended goals. Players can stay anonymous with a generated alias.
+- **Player survey**: ranked and multiple-choice questions on learning style, feedback style, coaching timing and motivation, plus open-ended goals. Prototype users can stay anonymous with a generated alias.
 - **Shareable intake**: send the survey by link, email or QR code.
 - **Player profile**: survey answers organized into coaching-relevant sections, Statcast-style percentile bars for hitters, catchers and pitchers, and a running log of coaching notes.
 - **AI profile summary**: a Genkit flow on Google Gemini combines the survey, notes and weakest stat areas into an intro, do's and don'ts, and suggested focus areas, each with its reasoning cited.
