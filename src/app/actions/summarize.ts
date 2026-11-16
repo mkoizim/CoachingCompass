@@ -16,6 +16,7 @@ export type SummarizeResult =
 // memory, so this is per-instance; the hard ceiling is the Gemini API key's own quota.
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 15;
+const TIMEOUT_MS = 50_000;
 const recent = new Map<string, number[]>();
 
 function isRateLimited(key: string): boolean {
@@ -47,11 +48,20 @@ export async function generateProfileSummary(input: SummarizePlayerProfileInput)
     return { ok: false, error: 'You have generated a lot of summaries in the last hour. Please try again later.' };
   }
 
+  const started = Date.now();
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
-    const summary = await summarizePlayerProfile(parsed.data);
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`timed out after ${TIMEOUT_MS / 1000}s`)), TIMEOUT_MS);
+    });
+    const summary = await Promise.race([summarizePlayerProfile(parsed.data), timeout]);
+    console.log(`AI summary generated in ${Date.now() - started}ms`);
     return { ok: true, summary };
   } catch (e) {
-    console.error('AI summary generation failed:', e);
+    const detail = e instanceof Error ? `${e.name}: ${e.message}` : String(e);
+    console.error(`AI summary generation failed after ${Date.now() - started}ms: ${detail}`);
     return { ok: false, error: 'The AI summary service is unavailable right now. Please try again later.' };
+  } finally {
+    clearTimeout(timer);
   }
 }

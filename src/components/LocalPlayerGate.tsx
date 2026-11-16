@@ -45,6 +45,8 @@ export function LocalPlayerGate({ id, seedPlayer, children }: LocalPlayerGatePro
     );
   }
 
-  // Remount once after hydration so client state starts from the local version.
-  return <div key={hydrated ? 'client' : 'server'}>{children(player)}</div>;
+  // If this browser has its own version of a shared player, remount once so client
+  // state starts from it. Otherwise keep the server-rendered tree (remounting would
+  // re-run mount effects such as AI summary generation).
+  return <div key={player === seedPlayer ? 'shared' : 'local'}>{children(player)}</div>;
 }
